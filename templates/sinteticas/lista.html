@@ -1,0 +1,155 @@
+{% extends "index2.html" %}
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Manejo del formulario de eliminación
+        $('form[id^="eliminar_form_"]').submit(function (event) {
+            event.preventDefault(); // Evita que el formulario se envíe de manera tradicional
+
+            if (confirm('¿Estás seguro de que deseas eliminar esta sintética?')) {
+                var form = $(this);
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    success: function () {
+                        // Elimina la fila de la tabla sin recargar la página
+                        form.closest('tr').remove();
+                    },
+                    error: function () {
+                        alert('Error al eliminar la sintética.');
+                    }
+                });
+            }
+        });
+
+        // Manejo del formulario de búsqueda y ordenación
+        $('#ordenarForm').submit(function (event) {
+            event.preventDefault();  // Evita que el formulario se envíe de la manera tradicional
+
+            const attribute = $('#sortAttribute').val();
+            const order = $('#sortOrder').val();
+
+            // Envia la solicitud de ordenación al servidor
+            fetch(`/sinteticas/ordenar?sortMethod=quick&sortAttribute=${attribute}&sortOrder=${order}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Datos ordenados:", data);
+                    // Actualiza la tabla con los datos ordenados
+                    updateTable(data);
+                })
+                .catch(error => console.error("Error:", error));
+        });
+
+        function updateTable(data) {
+            const tableBody = $('#tabla tbody');
+            tableBody.empty();  // Limpia la tabla actual
+
+            data.forEach(item => {
+                const row = `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.nombre}</td>
+                <td>${item.direccion}</td>
+                <td>${item.horario}</td>
+                <td>${item.lng}</td>
+                <td>${item.lat}</td>
+                <td class="btn-group">
+                    <a href="/sinteticas/editar/${item.id}" class="btn btn-info">MODIFICAR</a>
+                    <form id="eliminar_form_${item.id}" action="/sinteticas/eliminar/${item.id}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        `;
+                tableBody.append(row);
+            });
+        }
+    });
+</script>
+<style>
+    .btn-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-group form {
+        display: inline;
+        margin: 0;
+    }
+
+    .btn-danger.btn-sm {
+        height: 36px;
+        line-height: 1.0;
+    }
+</style>
+<div class="container">
+    <div class="content-wrapper"> <!-- Agrega esta clase para manejar el desplazamiento -->
+        <div class="mb-4">
+            <h2 class="text-white mb-4">Lista de Sintéticas</h2>
+            <div id="busqueda-section" class="d-flex flex-column align-items-center justify-content-center mb-4">
+
+                <!-- Botón de Ordenar -->
+                <form id="ordenarForm">
+                    <select id="sortAttribute">
+                        <option value="_nombre">Nombre</option>
+                        <option value="_direccion">Dirección</option>
+                        <!-- Añade más opciones si es necesario -->
+                    </select>
+                    <select id="sortOrder">
+                        <option value="ascendente">Ascendente</option>
+                        <option value="descendente">Descendente</option>
+                    </select>
+                    <button type="submit">Ordenar</button>
+                </form>
+            </div>
+
+            <div class="mb-4">
+                <a href="/sinteticas/agregar" class="btn btn-danger btn-custom me-2">Agregar</a>
+                <a href="/sinteticas/verGrafo" target="_blank" class="btn btn-info btn-custom me-2">Ver Grafo</a>
+                <a href="/sinteticas/admin" class="btn btn-warning btn-custom">Administrar Grafo</a>
+                <a href="/sinteticas/camino" class="btn btn-danger btn-custom">Encontrar Camino Mas Rapido</a>
+            </div>
+
+            <div class="table-container mx-auto">
+                <table id="tabla" class="table table-striped table-bordered text-white">
+                    <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Nombre</th>
+                            <th>Dirección</th>
+                            <th>Horario</th>
+                            <th>Longitud</th>
+                            <th>Latitud</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in lista %}
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.direccion}}</td>
+                            <td>{{item.horario}}</td>
+                            <td>{{item.lng}}</td>
+                            <td>{{item.lat}}</td>
+                            <td><a href="/sinteticas/editar/{{item.id}}" class="btn btn-info">MODIFICAR</a></td>
+                            <td>
+                                <!-- Formulario para eliminar con JavaScript -->
+                                <form id="eliminar_form_{{ item.id }}" action="/sinteticas/eliminar/{{ item.id }}"
+                                    method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
