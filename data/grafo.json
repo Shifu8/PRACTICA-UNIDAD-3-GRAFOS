@@ -2,127 +2,159 @@
     "vertices": [
         {
             "id": 1,
-            "label": "PlayZone"
-        },
-        {
-            "id": 2,
-            "label": "Zona Verde"
-        },
-        {
-            "id": 3,
-            "label": "Campo Elite"
-        },
-        {
-            "id": 4,
             "label": "Campo Trendy"
         },
         {
-            "id": 5,
+            "id": 2,
+            "label": "Campo Elite"
+        },
+        {
+            "id": 3,
             "label": "CASA SHIFU"
         },
         {
+            "id": 4,
+            "label": "PlayZone"
+        },
+        {
+            "id": 5,
+            "label": "Facultad de energia"
+        },
+        {
             "id": 6,
-            "label": "dfsfdsdf"
-        },
-        {
-            "id": 7,
-            "label": "Urban Green"
-        },
-        {
-            "id": 8,
-            "label": "Campo Trendy2"
+            "label": "SHIFU"
         }
     ],
     "edges": [
         {
             "source": 1,
             "target": 2,
-            "weight": 0.758
+            "weight": 0.775
         },
         {
             "source": 1,
-            "target": 3,
-            "weight": 0.298
+            "target": 6,
+            "weight": 1.134
         },
         {
             "source": 1,
             "target": 4,
-            "weight": 1.219
+            "weight": 1.198
         },
         {
             "source": 1,
             "target": 5,
-            "weight": 0.402
+            "weight": 1.727
         },
         {
             "source": 2,
             "target": 1,
-            "weight": 0.758
+            "weight": 0.775
         },
         {
             "source": 2,
-            "target": 7,
-            "weight": 1.899
-        },
-        {
-            "source": 3,
-            "target": 1,
-            "weight": 0.298
-        },
-        {
-            "source": 3,
-            "target": 4,
-            "weight": 1.078
-        },
-        {
-            "source": 4,
-            "target": 1,
-            "weight": 1.219
-        },
-        {
-            "source": 4,
             "target": 3,
-            "weight": 1.078
+            "weight": 0.626
         },
         {
-            "source": 4,
-            "target": 6,
-            "weight": 1.21
-        },
-        {
-            "source": 5,
-            "target": 1,
-            "weight": 0.402
-        },
-        {
-            "source": 5,
-            "target": 6,
-            "weight": 0.837
-        },
-        {
-            "source": 6,
-            "target": 4,
-            "weight": 1.21
-        },
-        {
-            "source": 6,
+            "source": 2,
             "target": 5,
-            "weight": 0.837
+            "weight": 2.01
         },
         {
-            "source": 6,
-            "target": 8,
-            "weight": 3.096
+            "source": 2,
+            "target": 4,
+            "weight": 0.81
         },
         {
-            "source": 7,
+            "source": 3,
             "target": 2,
-            "weight": 1.899
+            "weight": 0.626
         },
         {
-            "source": 8,
+            "source": 3,
+            "target": 5,
+            "weight": 1.454
+        },
+        {
+            "source": 3,
+            "target": 4,
+            "weight": 0.938
+        },
+        {
+            "source": 3,
             "target": 6,
-            "weight": 3.096
+            "weight": 1.333
+        },
+        {
+            "source": 4,
+            "target": 1,
+            "weight": 1.198
+        },
+        {
+            "source": 4,
+            "target": 2,
+            "weight": 0.81
+        },
+        {
+            "source": 4,
+            "target": 3,
+            "weight": 0.938
+        },
+        {
+            "source": 4,
+            "target": 5,
+            "weight": 1.921
+        },
+        {
+            "source": 4,
+            "target": 6,
+            "weight": 1.396
+        },
+        {
+            "source": 5,
+            "target": 1,
+            "weight": 1.727
+        },
+        {
+            "source": 5,
+            "target": 2,
+            "weight": 2.01
+        },
+        {
+            "source": 5,
+            "target": 3,
+            "weight": 1.454
+        },
+        {
+            "source": 5,
+            "target": 4,
+            "weight": 1.921
+        },
+        {
+            "source": 5,
+            "target": 6,
+            "weight": 2.787
+        },
+        {
+            "source": 6,
+            "target": 1,
+            "weight": 1.134
+        },
+        {
+            "source": 6,
+            "target": 3,
+            "weight": 1.333
+        },
+        {
+            "source": 6,
+            "target": 4,
+            "weight": 1.396
+        },
+        {
+            "source": 6,
+            "target": 5,
+            "weight": 2.787
         }
     ]
 }

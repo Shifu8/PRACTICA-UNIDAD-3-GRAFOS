@@ -82,16 +82,16 @@ class Graph():
 
         for i in range(self.num_vertex):
             label = self.getLabel(i)  
-            graph_data['vertices'].append({'id': i + 1, 'nombre': label})
+            graph_data['vertices'].append({'id': i + 1, 'label': label})
 
             adjs = self.adjacent(i)
             if not adjs.isEmpty:
                 for j in range(adjs._length):
                     adj = adjs.get(j)
                     graph_data['edges'].append({
-                        'origen': i + 1,
-                        'destino': adj._destination + 1,
-                        'distancia': adj._weight
+                        'source': i + 1,
+                        'target': adj._destination + 1,
+                        'weight': adj._weight
                     })
         file_path = os.path.join('data', 'grafo.json')
 
